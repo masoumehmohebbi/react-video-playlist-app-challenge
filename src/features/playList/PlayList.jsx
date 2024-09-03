@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PlayListItem from "./PlayListItem";
 import Loading from "../../ui/Loading";
+import VideoPlayer from "./VideoPlayer";
 
 const PlayList = () => {
   const [data, setData] = useState([]);
@@ -29,7 +30,10 @@ const PlayList = () => {
     );
   return (
     <div className="p-5">
-      <PlayListItem data={data} />
+      {/* <PlayListItem data={data} /> */}
+      {data?.map((video) => (
+        <VideoPlayer key={video.id} video={video} />
+      ))}
     </div>
   );
 };

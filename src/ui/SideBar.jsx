@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
   ChevronDownIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -47,12 +47,13 @@ const SideBar = () => {
       {/* accordion body */}
       <div className={`pt-1 ${isOpen ? "block" : "hidden"}`}>
         {data?.map((video) => (
-          <div
-            className="my-2 hover:bg-primary-200 cursor-pointer rounded-lg p-2"
+          <Link
+            to={video.videoUrl}
             key={video.id}
+            className="block my-2 hover:bg-primary-200 cursor-pointer rounded-lg p-2"
           >
             {video.title}
-          </div>
+          </Link>
         ))}
       </div>
     </div>
