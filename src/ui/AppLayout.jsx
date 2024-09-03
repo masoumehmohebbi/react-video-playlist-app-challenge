@@ -5,7 +5,8 @@ const AppLayout = ({ children }) => {
   return (
     <div>
       <Header />
-      {children}
+
+      <div className="min-h-[81vh]">{children}</div>
 
       <Footer />
     </div>
