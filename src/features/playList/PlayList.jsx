@@ -28,7 +28,7 @@ const PlayList = () => {
       </div>
     );
   return (
-    <div>
+    <div className="p-5">
       <PlayListItem data={data} />
     </div>
   );
