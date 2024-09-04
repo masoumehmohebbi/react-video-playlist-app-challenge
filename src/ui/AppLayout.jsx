@@ -6,7 +6,7 @@ const AppLayout = ({ children }) => {
     <div>
       <Header />
 
-      <div className="min-h-[89vh] bg-secondary-50">{children}</div>
+      <div className=" bg-secondary-900 py-11 ">{children}</div>
 
       <Footer />
     </div>

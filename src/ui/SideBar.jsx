@@ -23,9 +23,13 @@ const SideBar = () => {
     fetchVidosLists();
   }, []);
   return (
-    <div className="h-full p-5">
+    <div className="h-full p-5  ">
       {/* accordion */}
-      <div className="rounded-3xl overflow-hidden shadow-md sticky">
+      <div
+        className={`rounded-3xl overflow-hidden shadow-md sticky ${
+          isOpen && "rounded-b-none"
+        }`}
+      >
         {/* accordion header */}
         <div
           onClick={() => setIsOpen(!isOpen)}
@@ -45,15 +49,21 @@ const SideBar = () => {
         </div>
       </div>
       {/* accordion body */}
-      <div className={`pt-1 ${isOpen ? "block" : "hidden"}`}>
+      <div
+        className={`p-3 pt-1 rounded-b-3xl shadow-lg bg-primary-400 ${
+          isOpen ? "block" : "hidden"
+        } overflow-y-scroll max-h-96`}
+      >
         {data?.map((video) => (
-          <Link
-            to={video.videoUrl}
+          <div
             key={video.id}
-            className="block my-2 hover:bg-primary-200 cursor-pointer rounded-lg p-2"
+            className="flex gap-x-2 p-2 items-center my-4 hover:bg-primary-200 cursor-pointer rounded-lg"
           >
-            {video.title}
-          </Link>
+            <img className="w-28 h-20 rounded-md" src={video.image} />
+            <Link to={video.videoUrl} className="block">
+              {video.title}
+            </Link>
+          </div>
         ))}
       </div>
     </div>

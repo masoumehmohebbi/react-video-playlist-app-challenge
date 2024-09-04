@@ -1,14 +1,11 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import PlayListItem from "./PlayListItem";
-import Loading from "../../ui/Loading";
-import VideoPlayer from "./VideoPlayer";
+import Plyr from "@rocketseat/react-plyr";
+import axios from "axios";
 
 const PlayList = () => {
   const [data, setData] = useState([]);
-
   useEffect(() => {
-    const fetchVidosLists = async () => {
+    const fetchVideosData = async () => {
       try {
         const { data } = await axios.get("http://localhost:5000/data");
         setData(data);
@@ -17,23 +14,18 @@ const PlayList = () => {
       }
     };
 
-    fetchVidosLists();
+    fetchVideosData();
   }, []);
-
   console.log(data);
 
-  if (data.length === 0)
-    return (
-      <div className="h-[70%] flex items-center justify-center">
-        <Loading />
-      </div>
-    );
   return (
-    <div className="p-5">
-      {/* <PlayListItem data={data} /> */}
-      {data?.map((video) => (
-        <VideoPlayer key={video.id} video={video} />
-      ))}
+    <div>
+      <Plyr
+        type="youtube" // or "vimeo"
+        // type="vimeo"
+        videoId="ZZbTlgfa2Dg?si=oI8jcrf5sQ9wHNOf"
+        controls={true}
+      />
     </div>
   );
 };
