@@ -1,33 +1,21 @@
-import { useEffect, useState } from "react";
-import Plyr from "@rocketseat/react-plyr";
-import axios from "axios";
+import Plyr from "plyr-react";
+// import "plyr-react/dist/plyr.css";
+import "./dist/plyr.css";
+import contents from "./contents.json";
 
-const PlayList = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const fetchVideosData = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:5000/data");
-        setData(data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    fetchVideosData();
-  }, []);
-  console.log(data);
-
+export default function PlayList() {
   return (
-    <div>
-      <Plyr
-        type="youtube" // or "vimeo"
-        // type="vimeo"
-        videoId="ZZbTlgfa2Dg?si=oI8jcrf5sQ9wHNOf"
-        controls={true}
-      />
-    </div>
+    <ul className="video-list">
+      {contents?.videos?.map((video) => (
+        <li key={video.id} className="video-item">
+          <Plyr
+            source={{
+              type: "video",
+              sources: [{ src: video.id, provider: video.source }],
+            }}
+          />
+        </li>
+      ))}
+    </ul>
   );
-};
-
-export default PlayList;
+}
