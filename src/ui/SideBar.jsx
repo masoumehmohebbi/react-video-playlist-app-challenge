@@ -25,7 +25,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
     fetchVideos();
   }, [setCurrentVideo, currentVideo]);
 
-  console.log(currentVideo?.id);
+  console.log(currentVideo.id);
 
   return (
     <div className="h-full p-5">
@@ -61,7 +61,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
             key={video.id}
             className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-200 cursor-pointer rounded-lg ${
               currentVideo && video.id === currentVideo.id
-                ? "bg-primary-500"
+                ? "border-2 border-primary-900 bg-primary-700 shadow-lg"
                 : ""
             }`}
             onClick={() => setCurrentVideo(video)}

@@ -27,7 +27,7 @@ const persianLabels = {
   settingsLoop: "حلقه",
 };
 
-const VideoPlayer = ({ currentVideo }) => {
+const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
   const playerRef = useRef(null);
 
   useEffect(() => {
@@ -106,8 +106,6 @@ const VideoPlayer = ({ currentVideo }) => {
                 "pip",
                 "airplay",
                 "fullscreen",
-                "next",
-                "previous",
                 "quality",
               ],
               settings: ["quality", "speed", "loop"],
@@ -133,8 +131,6 @@ const VideoPlayer = ({ currentVideo }) => {
                 pip: persianLabels.pip,
                 airplay: persianLabels.airplay,
                 fullscreen: persianLabels.fullscreen,
-                next: persianLabels.next,
-                previous: persianLabels.previous,
                 quality: persianLabels.quality,
                 settingsQuality: persianLabels.settingsQuality,
                 settingsSpeed: persianLabels.settingsSpeed,
@@ -144,6 +140,20 @@ const VideoPlayer = ({ currentVideo }) => {
           />
           <div className="absolute top-4 left-0 right-0 text-center text-white bg-black bg-opacity-50 p-2">
             <h3 className="text-xl">{currentVideo.title}</h3>
+            <div className="flex justify-between mt-2">
+              <button
+                onClick={onPrevious}
+                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+              >
+                {persianLabels.previous}
+              </button>
+              <button
+                onClick={onNext}
+                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+              >
+                {persianLabels.next}
+              </button>
+            </div>
           </div>
         </div>
       ) : (
