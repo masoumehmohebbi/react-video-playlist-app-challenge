@@ -38,7 +38,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
         >
           <div className="flex items-center gap-x-2">
             <RectangleGroupIcon className="w-6 h-6" />
-            <span>List of movies</span>
+            <span>لیست فیلم ها</span>
           </div>
           <span
             className={`transition-all duration-200 w-6 h-6 ${

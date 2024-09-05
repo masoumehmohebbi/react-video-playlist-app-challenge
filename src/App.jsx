@@ -39,10 +39,8 @@ export default function App() {
   return (
     <AppLayout>
       <div className="grid grid-cols-12">
-        <div className="col-span-4">
+        <div className="col-span-12 lg:col-span-4">
           <SideBar
-            // setCurrentVideo={setCurrentVideo}
-            // currentVideo={currentVideo}
             setCurrentVideo={(video) => {
               const index = data.findIndex((v) => v.id === video.id);
               setCurrentIndex(index);
@@ -50,10 +48,8 @@ export default function App() {
             currentVideo={data[currentIndex]}
           />
         </div>
-        <div className="col-span-8">
-          {/* <VideoPlayer currentVideo={currentVideo} /> */}
+        <div className="col-span-12 lg:col-span-8">
           <VideoPlayer
-            // currentVideo={currentVideo}
             currentVideo={data[currentIndex]}
             onPrevious={handlePrevious}
             onNext={handleNext}
