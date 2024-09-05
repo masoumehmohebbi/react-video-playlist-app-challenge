@@ -57,9 +57,9 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
         {data.map((video) => (
           <div
             key={video.id}
-            className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-200 hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer rounded-lg ${
+            className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-300 shadow-lg hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer rounded-lg ${
               currentVideo && video.id === currentVideo.id
-                ? "border-2 border-primary-900 bg-primary-700 shadow-lg"
+                ? "border-2 border-primary-900 bg-primary-700 hover:bg-primary-800 shadow-lg"
                 : ""
             }`}
             onClick={() => setCurrentVideo(video)}
