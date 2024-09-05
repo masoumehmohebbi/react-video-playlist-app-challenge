@@ -29,6 +29,36 @@ const persianLabels = {
   settingsLoop: "حلقه",
 };
 
+// Fake subtitle data
+const fakeCaptions = [
+  { start: 0, end: 5, text: "سلام، این یک ویدیو تستی است." },
+  { start: 6, end: 10, text: "این متن نمونه برای زیرنویس است." },
+  { start: 11, end: 15, text: "امیدواریم که مفید باشد!" },
+];
+
+// Convert captions to WebVTT format and encode in Base64
+const captionsToVTT = (captions) => {
+  const vttContent =
+    "WEBVTT\n\n" +
+    captions
+      .map((caption, index) => {
+        const start =
+          new Date(caption.start * 1000).toISOString().substr(11, 8) + ".000";
+        const end =
+          new Date(caption.end * 1000).toISOString().substr(11, 8) + ".000";
+        return `${index + 1}\n${start} --> ${end}\n${caption.text}\n`;
+      })
+      .join("\n");
+
+  // Encode in Base64
+  const uint8Array = new TextEncoder().encode(vttContent);
+  let binary = "";
+  for (let i = 0; i < uint8Array.byteLength; i++) {
+    binary += String.fromCharCode(uint8Array[i]);
+  }
+  return btoa(binary);
+};
+
 const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
   const playerRef = useRef(null);
 
@@ -85,9 +115,9 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                 {
                   kind: "captions",
                   label: "فارسی",
-                  src: currentVideo.subtitles,
                   srclang: "fa",
                   default: true,
+                  src: "data:text/vtt;base64," + captionsToVTT(fakeCaptions),
                 },
               ],
             }}
@@ -116,7 +146,6 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                 options: [720, 1080],
               },
               tooltips: { controls: true, seek: true },
-              // Custom labels for controls
               i18n: {
                 play: persianLabels.play,
                 pause: persianLabels.pause,
@@ -161,7 +190,6 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
           </div>
         </div>
       ) : (
-        // <p>یک ویدیو را از نوار کناری انتخاب کنید تا پخش شود.</p>
         <div className="min-h-screen w-full flex items-center justify-center">
           <Loading width="110" height="150" />
         </div>
