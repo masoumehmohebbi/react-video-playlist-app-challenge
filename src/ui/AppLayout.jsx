@@ -5,7 +5,7 @@ const AppLayout = ({ children }) => {
   return (
     <div>
       <Header />
-      <div className=" bg-secondary-900 py-11 max-h-[100vh]">{children}</div>
+      <div className=" bg-secondary-900 py-11 min-h-screen">{children}</div>
       <Footer />
     </div>
   );

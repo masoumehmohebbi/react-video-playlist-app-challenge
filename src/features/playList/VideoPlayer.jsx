@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import Plyr from "plyr-react";
 import "plyr-react/plyr.css";
+import { MdOutlineNavigateNext } from "react-icons/md";
+import Loading from "../../ui/Loading";
 
 // Persian translations for the controls
 const persianLabels = {
@@ -143,21 +145,26 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
             <div className="flex justify-between mt-2">
               <button
                 onClick={onPrevious}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                className="transition duration-500 bg-secondary-700 flex items-center justify-center gap-x-1 hover:bg-primary-600 text-secondary-0 px-4 py-2 rounded-3xl"
               >
+                <MdOutlineNavigateNext className="w-6 h-6 rotate-180" />
                 {persianLabels.previous}
               </button>
               <button
                 onClick={onNext}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                className="transition duration-500 bg-secondary-700 flex items-center justify-center gap-x-1 hover:bg-primary-600 text-secondary-0 px-4 py-2 rounded-3xl"
               >
                 {persianLabels.next}
+                <MdOutlineNavigateNext className="w-6 h-6" />
               </button>
             </div>
           </div>
         </div>
       ) : (
-        <p>یک ویدیو را از نوار کناری انتخاب کنید تا پخش شود.</p>
+        // <p>یک ویدیو را از نوار کناری انتخاب کنید تا پخش شود.</p>
+        <div className="min-h-screen w-full flex items-center justify-center">
+          <Loading width="110" height="150" />
+        </div>
       )}
     </div>
   );

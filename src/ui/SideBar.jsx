@@ -25,8 +25,6 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
     fetchVideos();
   }, [setCurrentVideo, currentVideo]);
 
-  console.log(currentVideo.id);
-
   return (
     <div className="h-full p-5">
       <div
@@ -52,14 +50,14 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
         </div>
       </div>
       <div
-        className={`p-3 pt-1 rounded-b-3xl shadow-lg bg-primary-500 ${
+        className={`p-4 pt-1 rounded-b-3xl shadow-lg bg-primary-500 ${
           isOpen ? "block" : "hidden"
         } overflow-y-scroll max-h-96`}
       >
         {data.map((video) => (
           <div
             key={video.id}
-            className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-200 cursor-pointer rounded-lg ${
+            className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-200 hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer rounded-lg ${
               currentVideo && video.id === currentVideo.id
                 ? "border-2 border-primary-900 bg-primary-700 shadow-lg"
                 : ""
