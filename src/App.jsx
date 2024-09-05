@@ -3,25 +3,27 @@ import AppLayout from "./ui/AppLayout";
 import SideBar from "./ui/SideBar";
 import VideoPlayer from "./features/playList/VideoPlayer";
 import axios from "axios";
+import { fetchVideos } from "./utils/getVideoList";
 
 export default function App() {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [data, setData] = useState([]);
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:5000/data");
-        setData(data);
-        if (data.length > 0 && !currentVideo) {
-          setCurrentVideo(data[0]); // Set the first video as default if no video is currently set
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    // const fetchVideos = async () => {
+    //   try {
+    //     const { data } = await axios.get("http://localhost:5000/data");
+    //     setData(data);
+    //     if (data.length > 0 && !currentVideo) {
+    //       setCurrentVideo(data[0]);
+    //     }
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
 
-    fetchVideos();
+    // fetchVideos();
+    fetchVideos(setData, setCurrentVideo, currentVideo);
   }, [setCurrentVideo, currentVideo]);
 
   const handlePrevious = () => {

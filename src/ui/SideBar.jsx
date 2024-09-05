@@ -4,29 +4,31 @@ import {
   ChevronDownIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
+import { fetchVideos } from "../utils/getVideoList";
 
 const SideBar = ({ setCurrentVideo, currentVideo }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const { data } = await axios.get("http://localhost:5000/data");
-        setData(data);
-        if (data.length > 0 && !currentVideo) {
-          setCurrentVideo(data[0]); // Set the first video as default if no video is currently set
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    // const fetchVideos = async () => {
+    //   try {
+    //     const { data } = await axios.get("http://localhost:5000/data");
+    //     setData(data);
+    //     if (data.length > 0 && !currentVideo) {
+    //       setCurrentVideo(data[0]); // Set the first video as default if no video is currently set
+    //     }
+    //   } catch (err) {
+    //     console.log(err);
+    //   }
+    // };
 
-    fetchVideos();
+    // fetchVideos();
+    fetchVideos(setData, setCurrentVideo, currentVideo);
   }, [setCurrentVideo, currentVideo]);
 
   return (
-    <div className="h-full p-5">
+    <div dir="rtl" className="h-full p-5">
       <div
         className={`rounded-3xl overflow-hidden shadow-md sticky ${
           isOpen && "rounded-b-none"
@@ -56,6 +58,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
       >
         {data.map((video) => (
           <div
+            dir="ltr"
             key={video.id}
             className={`flex gap-x-2 p-2 items-center my-4 hover:bg-primary-300 shadow-lg hover:scale-105 transition-all duration-500 ease-in-out cursor-pointer rounded-lg ${
               currentVideo && video.id === currentVideo.id
