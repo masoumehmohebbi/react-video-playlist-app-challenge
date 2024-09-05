@@ -1,4 +1,5 @@
-@import url("/fonts.css");
+/* @import url("/fonts.css"); */
+@import url("https://fonts.googleapis.com/css2?family=Protest+Guerrilla&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -76,9 +77,10 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Vazir";
+  /* font-family: "Vazir"; */
   min-height: 100vh;
   user-select: none;
+  /* font-family: "Protest Guerrilla", sans-serif; */
 }
 
 * {
