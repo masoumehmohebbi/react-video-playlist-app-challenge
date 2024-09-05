@@ -139,11 +139,20 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                 "airplay",
                 "fullscreen",
                 "quality",
+                "markers",
               ],
               settings: ["quality", "speed", "loop"],
               quality: {
                 default: 720,
-                options: [720, 1080],
+                options: [1080, 720],
+              },
+              markers: {
+                enabled: true,
+                points: [
+                  { time: 150, label: "Point 1: 2.5 Minutes" },
+                  { time: 300, label: "Point 1: 5 Minutes" },
+                  { time: 600, label: "Point 2: 10 Minutes" },
+                ],
               },
               tooltips: { controls: true, seek: true },
               i18n: {
@@ -169,7 +178,7 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
               },
             }}
           />
-          <div className="absolute top-4 left-0 right-0 text-center text-white bg-black bg-opacity-50 p-2">
+          <div className="absolute top-4 left-0 right-0 text-center text-secondary-0 bg-black bg-opacity-50 p-2">
             <h3 className="text-xl">{currentVideo.title}</h3>
             <div className="flex justify-between mt-2">
               <button

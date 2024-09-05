@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import {
   ChevronDownIcon,
@@ -40,7 +39,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
         >
           <div className="flex items-center gap-x-2">
             <RectangleGroupIcon className="w-6 h-6" />
-            <span>لیست فیلم ها</span>
+            <span className="text-lg font-bold">لیست فیلم ها</span>
           </div>
           <span
             className={`transition-all duration-200 w-6 h-6 ${
@@ -73,8 +72,8 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
               alt={video.title}
             />
             <div>
-              <h4 className="text-white">{video.title}</h4>
-              <p className="text-gray-300">{video.author}</p>
+              <h4 className="text-secondary-0">{video.title}</h4>
+              <p className="text-secondary-600">{video.author}</p>
             </div>
           </div>
         ))}

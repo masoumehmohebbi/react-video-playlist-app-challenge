@@ -6,7 +6,7 @@ const Header = () => {
     blur-0 opacity-100 sticky top-0 font-sans items-center px-2 gap-x-3 sm:px-5 flex justify-center font-black`}
     >
       <h1 className="text-[28px]">پلی لیست فیلم</h1>
-      <RiPlayList2Fill className="text-secondary-900 w-9 h-9 absolute right-5" />
+      <RiPlayList2Fill className="text-secondary-700 w-9 h-9 absolute right-5" />
     </nav>
   );
 };

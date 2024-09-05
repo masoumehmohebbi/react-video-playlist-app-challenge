@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import AppLayout from "./ui/AppLayout";
 import SideBar from "./ui/SideBar";
 import VideoPlayer from "./features/playList/VideoPlayer";
-import axios from "axios";
 import { fetchVideos } from "./utils/getVideoList";
 
 export default function App() {
@@ -50,7 +49,7 @@ export default function App() {
             currentVideo={data[currentIndex]}
           />
         </div>
-        <div className="col-span-12 lg:col-span-8">
+        <div className="col-span-12 lg:col-span-8 px-9 overflow-hidden">
           <VideoPlayer
             currentVideo={data[currentIndex]}
             onPrevious={handlePrevious}
