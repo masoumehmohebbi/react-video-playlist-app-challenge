@@ -57,7 +57,7 @@ const captionsToVTT = (captions) => {
   for (let i = 0; i < uint8Array.byteLength; i++) {
     binary += String.fromCharCode(uint8Array[i]);
   }
-  
+
   return btoa(binary);
 };
 
@@ -181,8 +181,14 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
               title: currentVideo.title,
               sources: [
                 {
-                  src: currentVideo.videoUrl,
-                  provider: "html5",
+                  src: currentVideo.videoUrl720p,
+                  type: "video/mp4",
+                  size: 720,
+                },
+                {
+                  src: currentVideo.videoUrl1080p,
+                  type: "video/mp4",
+                  size: 1080,
                 },
               ],
               tracks: [
@@ -217,17 +223,13 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
               ],
               settings: ["quality", "speed", "loop"],
               quality: {
-                default: 720,
-                options: [1080, 720],
+                default: 720, // Default selection
+                options: [720, 1080], // Available quality options
+                forced: true, // Ensure Plyr uses these options
+                onChange: (newQuality) => {
+                  console.log("Selected quality:", newQuality);
+                },
               },
-              // markers: {
-              //   enabled: true,
-              //   points: [
-              //     { time: 150, label: "Point 1: 5 Minutes" },
-              //     { time: 300, label: "Point 1: 5 Minutes" },
-              //     { time: 600, label: "Point 2: 10 Minutes" },
-              //   ],
-              // },
               markers: {
                 enabled: true,
                 points: [
@@ -243,32 +245,12 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                   },
                 ],
               },
-
               tooltips: { controls: true, seek: true },
               previewThumbnails: { enabled: true, src: "" },
-              i18n: {
-                play: persianLabels.play,
-                pause: persianLabels.pause,
-                restart: persianLabels.restart,
-                rewind: persianLabels.rewind,
-                fastForward: persianLabels.fastForward,
-                progress: persianLabels.progress,
-                currentTime: persianLabels.currentTime,
-                duration: persianLabels.duration,
-                mute: persianLabels.mute,
-                volume: persianLabels.volume,
-                captions: persianLabels.captions,
-                settings: persianLabels.settings,
-                pip: persianLabels.pip,
-                airplay: persianLabels.airplay,
-                fullscreen: persianLabels.fullscreen,
-                quality: persianLabels.quality,
-                settingsQuality: persianLabels.settingsQuality,
-                settingsSpeed: persianLabels.settingsSpeed,
-                settingsLoop: persianLabels.settingsLoop,
-              },
+              i18n: persianLabels,
             }}
           />
+
           <div className="absolute top-4 left-0 right-0 text-center text-secondary-0 bg-black bg-opacity-50 p-2">
             <h3 className="text-xl">{currentVideo.title}</h3>
             <div className="flex justify-between mt-2">
