@@ -52,20 +52,74 @@ const captionsToVTT = (captions) => {
 
   // Encode in Base64
   const uint8Array = new TextEncoder().encode(vttContent);
+
   let binary = "";
   for (let i = 0; i < uint8Array.byteLength; i++) {
     binary += String.fromCharCode(uint8Array[i]);
   }
+  
   return btoa(binary);
 };
 
 const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
   const playerRef = useRef(null);
 
+  // useEffect(() => {
+  //   if (playerRef.current && playerRef.current.plyr) {
+  //     const player = playerRef.current.plyr;
+
+  //     if (currentVideo) {
+  //       player.source = {
+  //         type: "video",
+  //         title: currentVideo.title,
+  //         sources: [
+  //           {
+  //             src: currentVideo.videoUrl720p,
+  //             type: "video/mp4",
+  //             size: 720,
+  //           },
+  //           {
+  //             src: currentVideo.videoUrl1080p,
+  //             type: "video/mp4",
+  //             size: 1080,
+  //           },
+  //         ],
+  //         tracks: [
+  //           {
+  //             kind: "captions",
+  //             label: "فارسی",
+  //             src: currentVideo.subtitles,
+  //             srclang: "fa",
+  //             default: true,
+  //           },
+  //         ],
+  //       };
+
+  //       // Add tooltips to markers
+  //       const markers = document.querySelectorAll(".plyr__marker");
+  //       markers.forEach((marker) => {
+  //         const tooltip = document.createElement("div");
+  //         tooltip.className = "plyr-marker-tooltip";
+  //         tooltip.textContent = marker.dataset.tooltip || "";
+  //         marker.appendChild(tooltip);
+
+  //         marker.addEventListener("mouseover", () => {
+  //           tooltip.style.display = "block";
+  //         });
+
+  //         marker.addEventListener("mouseleave", () => {
+  //           tooltip.style.display = "none";
+  //         });
+  //       });
+  //     }
+  //   }
+  // }, [currentVideo]);
+
   useEffect(() => {
     if (playerRef.current && playerRef.current.plyr) {
       const player = playerRef.current.plyr;
 
+      // Update source
       if (currentVideo) {
         player.source = {
           type: "video",
@@ -92,6 +146,24 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
             },
           ],
         };
+
+        // Add tooltips to markers
+        const markers = document.querySelectorAll(".plyr__marker");
+        markers.forEach((marker) => {
+          const tooltipText = marker.dataset.tooltip || "";
+          const tooltip = document.createElement("div");
+          tooltip.className = "plyr-marker-tooltip";
+          tooltip.textContent = tooltipText;
+          marker.appendChild(tooltip);
+
+          marker.addEventListener("mouseover", () => {
+            tooltip.style.display = "block";
+          });
+
+          marker.addEventListener("mouseleave", () => {
+            tooltip.style.display = "none";
+          });
+        });
       }
     }
   }, [currentVideo]);
@@ -101,6 +173,8 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
       {currentVideo ? (
         <div className="relative w-full h-full">
           <Plyr
+            debug={true}
+            resetOnEnd={true}
             ref={playerRef}
             source={{
               type: "video",
@@ -146,15 +220,32 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                 default: 720,
                 options: [1080, 720],
               },
+              // markers: {
+              //   enabled: true,
+              //   points: [
+              //     { time: 150, label: "Point 1: 5 Minutes" },
+              //     { time: 300, label: "Point 1: 5 Minutes" },
+              //     { time: 600, label: "Point 2: 10 Minutes" },
+              //   ],
+              // },
               markers: {
                 enabled: true,
                 points: [
-                  { time: 150, label: "Point 1: 2.5 Minutes" },
-                  { time: 300, label: "Point 1: 5 Minutes" },
-                  { time: 600, label: "Point 2: 10 Minutes" },
+                  {
+                    time: 300,
+                    label: "Point 1: 5 Minutes",
+                    tooltip: "This is a tooltip for 5 minutes",
+                  },
+                  {
+                    time: 600,
+                    label: "Point 2: 10 Minutes",
+                    tooltip: "Another tooltip for 10 minutes",
+                  },
                 ],
               },
+
               tooltips: { controls: true, seek: true },
+              previewThumbnails: { enabled: true, src: "" },
               i18n: {
                 play: persianLabels.play,
                 pause: persianLabels.pause,

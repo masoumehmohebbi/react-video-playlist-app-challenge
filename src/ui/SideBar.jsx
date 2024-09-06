@@ -10,19 +10,6 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    // const fetchVideos = async () => {
-    //   try {
-    //     const { data } = await axios.get("http://localhost:5000/data");
-    //     setData(data);
-    //     if (data.length > 0 && !currentVideo) {
-    //       setCurrentVideo(data[0]); // Set the first video as default if no video is currently set
-    //     }
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // };
-
-    // fetchVideos();
     fetchVideos(setData, setCurrentVideo, currentVideo);
   }, [setCurrentVideo, currentVideo]);
 
