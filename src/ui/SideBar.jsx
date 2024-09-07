@@ -3,16 +3,35 @@ import {
   ChevronDownIcon,
   RectangleGroupIcon,
 } from "@heroicons/react/24/outline";
-import { fetchVideos } from "../utils/getVideoList";
+import useGetVideoLists from "../features/playList/useGetVideoLists";
+import Loading from "./Loading";
 
 const SideBar = ({ setCurrentVideo, currentVideo }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [data, setData] = useState([]);
+
+  const { isLoading, data: AllVideos } = useGetVideoLists();
+  console.log(AllVideos);
 
   useEffect(() => {
-    fetchVideos(setData, setCurrentVideo, currentVideo);
+    //! Fitst way: Use Utils Func
+    // fetchVideos(setData, setCurrentVideo, currentVideo);
+
+    //! */ Second Way: Use React-query
+    const fetchVideos = async () => {
+      try {
+        // setData(AllVideos);
+        if (AllVideos.length > 0 && !currentVideo) {
+          setCurrentVideo(AllVideos[0]);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchVideos();
   }, [setCurrentVideo, currentVideo]);
 
+  if (isLoading) return <Loading />;
   return (
     <div dir="rtl" className="h-full p-5">
       <div
@@ -42,7 +61,7 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
           isOpen ? "block" : "hidden"
         } overflow-y-scroll max-h-96`}
       >
-        {data.map((video) => (
+        {AllVideos.map((video) => (
           <div
             dir="ltr"
             key={video.id}
