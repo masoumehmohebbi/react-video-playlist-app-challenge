@@ -120,7 +120,7 @@ button:disabled:hover {
   border: 3px solid rgb(var(--color-primary-600));
 }
 
-/* plyr Styles */
+/* Plyr Styles */
 .plyr {
   overflow: hidden;
   border-radius: 30px !important;
@@ -149,7 +149,7 @@ button:disabled:hover {
 .marker-tooltip.show {
   display: block;
 }
-/* Add this to your CSS file */
+
 .plyr-marker-tooltip {
   position: absolute;
   background: #000;
@@ -176,5 +176,35 @@ button:disabled:hover {
 }
 
 .plyr__marker:hover .plyr-marker-tooltip {
+  display: block;
+}
+.chapter-markers {
+  position: absolute;
+  bottom: 0;
+  height: 100%;
+  pointer-events: none; /* To prevent the markers from blocking video controls */
+}
+
+.chapter-markers .marker {
+  position: absolute;
+  bottom: 0;
+  height: 20px;
+  width: 2px;
+  background-color: red;
+  cursor: pointer;
+}
+
+.chapter-markers .marker .tooltip {
+  display: none;
+  position: absolute;
+  bottom: 30px;
+  background-color: black;
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+
+.chapter-markers .marker:hover .tooltip {
   display: block;
 }

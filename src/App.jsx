@@ -3,7 +3,9 @@ import AppLayout from "./ui/AppLayout";
 import SideBar from "./ui/SideBar";
 import VideoPlayer from "./features/playList/VideoPlayer";
 import { fetchVideos } from "./utils/getVideoList";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 export default function App() {
   const [currentVideo, setCurrentVideo] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -38,25 +40,27 @@ export default function App() {
   };
 
   return (
-    <AppLayout>
-      <div className="grid grid-cols-12">
-        <div className="col-span-12 lg:col-span-4">
-          <SideBar
-            setCurrentVideo={(video) => {
-              const index = data.findIndex((v) => v.id === video.id);
-              setCurrentIndex(index);
-            }}
-            currentVideo={data[currentIndex]}
-          />
+    <QueryClientProvider client={queryClient}>
+      <AppLayout>
+        <div className="grid grid-cols-12">
+          <div className="col-span-12 lg:col-span-4">
+            <SideBar
+              setCurrentVideo={(video) => {
+                const index = data.findIndex((v) => v.id === video.id);
+                setCurrentIndex(index);
+              }}
+              currentVideo={data[currentIndex]}
+            />
+          </div>
+          <div className="col-span-12 lg:col-span-8 px-9 overflow-hidden">
+            <VideoPlayer
+              currentVideo={data[currentIndex]}
+              onPrevious={handlePrevious}
+              onNext={handleNext}
+            />
+          </div>
         </div>
-        <div className="col-span-12 lg:col-span-8 px-9 overflow-hidden">
-          <VideoPlayer
-            currentVideo={data[currentIndex]}
-            onPrevious={handlePrevious}
-            onNext={handleNext}
-          />
-        </div>
-      </div>
-    </AppLayout>
+      </AppLayout>
+    </QueryClientProvider>
   );
 }
