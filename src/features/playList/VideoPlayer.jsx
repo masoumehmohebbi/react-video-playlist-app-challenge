@@ -28,33 +28,6 @@ const persianLabels = {
   settingsLoop: "حلقه",
 };
 
-// const fakeCaptions = [
-//   { start: 0, end: 5, text: "سلام، این یک ویدیو تستی است." },
-//   { start: 6, end: 10, text: "این متن نمونه برای زیرنویس است." },
-//   { start: 11, end: 15, text: "امیدواریم که مفید باشد!" },
-// ];
-
-// const captionsToVTT = (captions) => {
-//   const vttContent =
-//     "WEBVTT\n\n" +
-//     captions
-//       .map((caption, index) => {
-//         const start =
-//           new Date(caption.start * 1000).toISOString().substr(11, 8) + ".000";
-//         const end =
-//           new Date(caption.end * 1000).toISOString().substr(11, 8) + ".000";
-//         return `${index + 1}\n${start} --> ${end}\n${caption.text}\n`;
-//       })
-//       .join("\n");
-
-//   const uint8Array = new TextEncoder().encode(vttContent);
-//   let binary = "";
-//   for (let i = 0; i < uint8Array.byteLength; i++) {
-//     binary += String.fromCharCode(uint8Array[i]);
-//   }
-//   return btoa(binary);
-// };
-
 const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
   const playerRef = useRef(null);
   const [chapters, setChapters] = useState([]);
@@ -65,30 +38,21 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
 
       if (currentVideo) {
         setChapters([
-          ...currentVideo.chapters,
-          { time: 300, label: "This is the 5-minute mark" }, // Add the 5-minute marker
+          { time: 120, label: "این دقیقه دوم است" }, // 2-minute marker
         ]);
         player.source = {
           type: "video",
           title: currentVideo.title,
           sources: [
             {
-              src: currentVideo.videoUrl720p,
-              type: "video/mp4",
-              size: 720,
-            },
-            {
-              src: currentVideo.videoUrl1080p,
-              type: "video/mp4",
-              size: 1080,
+              src: currentVideo.videoUrl,
+              provider: "html5",
             },
           ],
           tracks: [
             {
               kind: "captions",
               label: "فارسی",
-              // src: "data:text/vtt;base64," + captionsToVTT(fakeCaptions),
-              // src: "../public/subtitle.vtt",
               src: currentVideo.subtitle,
               srclang: "fa",
               default: true,
@@ -120,8 +84,6 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                   label: "فارسی",
                   srclang: "fa",
                   default: true,
-                  // src: "data:text/vtt;base64," + captionsToVTT(fakeCaptions),
-                  // src: "../public/subtitle.vtt",
                   src: currentVideo.subtitle,
                 },
               ],
@@ -144,6 +106,7 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                 "airplay",
                 "fullscreen",
                 "quality",
+                "markers",
               ],
               settings: ["quality", "speed", "loop"],
               quality: {
@@ -153,8 +116,24 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
               },
               tooltips: { controls: true, seek: true },
               i18n: persianLabels,
+              markers: {
+                enabled: true,
+                points: [
+                  {
+                    time: 300,
+                    label: "Point 1: 5 Minutes",
+                    tooltip: "This is a tooltip for 5 minutes",
+                  },
+                  {
+                    time: 600,
+                    label: "Point 2: 10 Minutes",
+                    tooltip: "Another tooltip for 10 minutes",
+                  },
+                ],
+              },
             }}
           />
+          {/* Chapter markers */}
           <div className="absolute bottom-0 left-0 right-0 h-full pointer-events-none">
             <div className="relative w-full h-full">
               <div className="chapter-markers absolute bottom-0 left-0 w-full h-full z-10">
@@ -169,7 +148,6 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
                         100
                       }%`,
                     }}
-                    title={chapter.label}
                   >
                     <span className="tooltip">{chapter.label}</span>
                   </div>
@@ -177,7 +155,8 @@ const VideoPlayer = ({ currentVideo, onPrevious, onNext }) => {
               </div>
             </div>
           </div>
-          <div className="absolute top-4 left-0 right-0 text-center text-white bg-black bg-opacity-50 p-2">
+          {/* Video Title */}
+          <div className="absolute top-4 left-0 right-0 text-center text-secondary-0 bg-black bg-opacity-50 p-2">
             <h3 className="text-xl">{currentVideo.title}</h3>
             <div className="flex justify-between mt-2">
               <button

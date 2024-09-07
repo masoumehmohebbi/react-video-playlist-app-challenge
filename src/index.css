@@ -125,86 +125,10 @@ button:disabled:hover {
   overflow: hidden;
   border-radius: 30px !important;
 }
-.plyr__marker {
-  position: absolute;
-  top: 50%;
-  width: 5px;
-  height: 5px;
-  background-color: red;
-  border-radius: 50%;
-  transform: translateY(-50%);
-}
-.marker-tooltip {
-  position: absolute;
-  background-color: #333;
-  color: #fff;
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  display: none;
-  z-index: 1000;
-  white-space: nowrap;
-}
 
-.marker-tooltip.show {
+.tooltip {
   display: block;
-}
-
-.plyr-marker-tooltip {
   position: absolute;
-  background: #000;
-  color: #fff;
-  padding: 5px;
-  border-radius: 3px;
-  font-size: 12px;
-  display: none;
-  z-index: 1000;
-}
-.plyr__marker {
-  position: relative;
-}
-
-.plyr-marker-tooltip {
-  display: none;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-  padding: 5px;
-  border-radius: 3px;
-  font-size: 12px;
-  white-space: nowrap;
-}
-
-.plyr__marker:hover .plyr-marker-tooltip {
-  display: block;
-}
-.chapter-markers {
-  position: absolute;
-  bottom: 0;
-  height: 100%;
-  pointer-events: none; /* To prevent the markers from blocking video controls */
-}
-
-.chapter-markers .marker {
-  position: absolute;
-  bottom: 0;
-  height: 20px;
-  width: 2px;
-  background-color: red;
-  cursor: pointer;
-}
-
-.chapter-markers .marker .tooltip {
-  display: none;
-  position: absolute;
-  bottom: 30px;
-  background-color: black;
-  color: white;
-  padding: 2px 5px;
-  border-radius: 3px;
-  white-space: nowrap;
-}
-
-.chapter-markers .marker:hover .tooltip {
-  display: block;
+  top: 0;
+  left: 0;
 }

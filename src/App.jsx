@@ -30,7 +30,7 @@ export default function App() {
     //! */ Second Way: Use React-query
     const fetchVideos = async () => {
       try {
-        if (AllVideos.length > 0 && !currentVideo) {
+        if (AllVideos?.length > 0 && !currentVideo) {
           setCurrentVideo(AllVideos[0]);
         }
       } catch (err) {
