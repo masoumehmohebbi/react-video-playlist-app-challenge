@@ -10,7 +10,6 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { isLoading, data: AllVideos } = useGetVideoLists();
-  console.log(AllVideos);
 
   useEffect(() => {
     //! Fitst way: Use Utils Func
@@ -19,7 +18,6 @@ const SideBar = ({ setCurrentVideo, currentVideo }) => {
     //! */ Second Way: Use React-query
     const fetchVideos = async () => {
       try {
-        // setData(AllVideos);
         if (AllVideos.length > 0 && !currentVideo) {
           setCurrentVideo(AllVideos[0]);
         }
