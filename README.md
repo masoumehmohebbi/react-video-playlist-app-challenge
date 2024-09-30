@@ -33,6 +33,11 @@ git clone https://github.com/masoumehmohebbi/react-video-playlist-app-challenge
 ```
 npm i
 ```
+<p>3. Run the <code>server</code> script to start the Json-db:</p>
+
+```
+npm run server
+```
 
 <p>4. Finally, run the <code>dev</code> script to start the dev server:</p>
 
