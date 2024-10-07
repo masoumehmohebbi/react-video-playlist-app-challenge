@@ -44,7 +44,3 @@ npm run server
 ```
 npm run dev
 ```
-
-
-
-vless://TelegramMainv2ray@www.speedtest.net:8080?path=/TELEGRAM-@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray%3Fed%3D8880&security=none&encryption=none&host=shOp.GkalAbar.Ir.&type=ws#(🇩🇪)»𝗺𝗮𝗶𝗻𝘃𝟮𝗿𝗮𝘆 « (WS 8)
