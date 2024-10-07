@@ -44,3 +44,4 @@ npm run server
 ```
 npm run dev
 ```
+vless://TelegramMainv2ray@www.speedtest.net:80?path=/TELEGRAM-@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray,@MainV2-ray%3Fed%3D2048&security=none&encryption=none&host=sHop.gkAlabar.iR&type=httpupgrade#(🇩🇪)»𝗺𝗮𝗶𝗻𝘃𝟮𝗿𝗮𝘆 « (HTTP 7)
